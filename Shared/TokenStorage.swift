@@ -32,13 +32,15 @@ enum TokenStorage {
             return
         }
         
-        SecItemAdd([
+        let status = SecItemAdd([
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: "acryliccanvassession",
             kSecAttrLabel as String: "Acrylic Canvas Session",
             kSecUseDataProtectionKeychain as String: true,
             kSecValueData as String: data as CFData
         ] as [String: Any] as CFDictionary, nil)
+        
+        print("Saved and got status \(status)")
     }
     
     static func clear() {

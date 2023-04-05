@@ -9,6 +9,23 @@
 /* Begin PBXBuildFile section */
 		8916511D29DDBF2800F65628 /* WorkingSetEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916511C29DDBF2800F65628 /* WorkingSetEnumerator.swift */; };
 		8916511F29DDC83900F65628 /* FileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916511E29DDC83900F65628 /* FileItem.swift */; };
+		892F106E29DE28B900A61E24 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E53FAF29DD13680033110F /* UniformTypeIdentifiers.framework */; };
+		892F108929DE28B900A61E24 /* Acrylic File Provider (iOS).appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 892F106D29DE28B900A61E24 /* Acrylic File Provider (iOS).appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		892F109029DE28E000A61E24 /* FolderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FDD29DD41EF0033110F /* FolderEnumerator.swift */; };
+		892F109129DE28E000A61E24 /* WorkingSetEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916511C29DDBF2800F65628 /* WorkingSetEnumerator.swift */; };
+		892F109229DE28E000A61E24 /* FileProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FB229DD13680033110F /* FileProviderExtension.swift */; };
+		892F109329DE28E000A61E24 /* CourseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FDA29DD3A100033110F /* CourseItem.swift */; };
+		892F109429DE28E000A61E24 /* RootItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FD729DD39600033110F /* RootItem.swift */; };
+		892F109529DE28E000A61E24 /* FolderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FE029DD47DB0033110F /* FolderItem.swift */; };
+		892F109629DE28E000A61E24 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FD429DD39550033110F /* Models.swift */; };
+		892F109729DE28E000A61E24 /* FileProviderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FB429DD13680033110F /* FileProviderItem.swift */; };
+		892F109829DE28E000A61E24 /* EmptyEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FB629DD13680033110F /* EmptyEnumerator.swift */; };
+		892F109929DE28E000A61E24 /* RootEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FCE29DD36560033110F /* RootEnumerator.swift */; };
+		892F109A29DE28E000A61E24 /* FileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916511E29DDC83900F65628 /* FileItem.swift */; };
+		892F109B29DE28E000A61E24 /* CourseEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FE329DD49550033110F /* CourseEnumerator.swift */; };
+		892F109C29DE290900A61E24 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FD129DD37750033110F /* API.swift */; };
+		892F109D29DE290900A61E24 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FC229DD14C10033110F /* TokenStorage.swift */; };
+		892F109E29DE290900A61E24 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FC529DD14D30033110F /* Constants.swift */; };
 		89E53F9B29DD13030033110F /* AcrylicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53F9A29DD13030033110F /* AcrylicApp.swift */; };
 		89E53F9D29DD13030033110F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53F9C29DD13030033110F /* ContentView.swift */; };
 		89E53F9F29DD13040033110F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89E53F9E29DD13040033110F /* Assets.xcassets */; };
@@ -17,7 +34,7 @@
 		89E53FB329DD13680033110F /* FileProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FB229DD13680033110F /* FileProviderExtension.swift */; };
 		89E53FB529DD13680033110F /* FileProviderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FB429DD13680033110F /* FileProviderItem.swift */; };
 		89E53FB729DD13680033110F /* EmptyEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FB629DD13680033110F /* EmptyEnumerator.swift */; };
-		89E53FBC29DD13680033110F /* Acrylic File Provider.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 89E53FAD29DD13680033110F /* Acrylic File Provider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		89E53FBC29DD13680033110F /* Acrylic File Provider (macOS).appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 89E53FAD29DD13680033110F /* Acrylic File Provider (macOS).appex */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		89E53FC329DD14C10033110F /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FC229DD14C10033110F /* TokenStorage.swift */; };
 		89E53FC429DD14C10033110F /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FC229DD14C10033110F /* TokenStorage.swift */; };
 		89E53FC629DD14D30033110F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FC529DD14D30033110F /* Constants.swift */; };
@@ -38,6 +55,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		892F108729DE28B900A61E24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89E53F8F29DD13030033110F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 892F106C29DE28B900A61E24;
+			remoteInfo = "Acrylic File Provider (iOS)";
+		};
 		89E53FBA29DD13680033110F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 89E53F8F29DD13030033110F /* Project object */;
@@ -54,7 +78,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				89E53FBC29DD13680033110F /* Acrylic File Provider.appex in Embed Foundation Extensions */,
+				89E53FBC29DD13680033110F /* Acrylic File Provider (macOS).appex in Embed Foundation Extensions */,
+				892F108929DE28B900A61E24 /* Acrylic File Provider (iOS).appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,13 +89,17 @@
 /* Begin PBXFileReference section */
 		8916511C29DDBF2800F65628 /* WorkingSetEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingSetEnumerator.swift; sourceTree = "<group>"; };
 		8916511E29DDC83900F65628 /* FileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileItem.swift; sourceTree = "<group>"; };
+		892F105329DE281200A61E24 /* Acrylic (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Acrylic (iOS).entitlements"; sourceTree = "<group>"; };
+		892F106D29DE28B900A61E24 /* Acrylic File Provider (iOS).appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Acrylic File Provider (iOS).appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		892F107629DE28B900A61E24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		892F107729DE28B900A61E24 /* Acrylic_File_Provider__iOS_.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Acrylic_File_Provider__iOS_.entitlements; sourceTree = "<group>"; };
 		89E53F9729DD13030033110F /* Acrylic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Acrylic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89E53F9A29DD13030033110F /* AcrylicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcrylicApp.swift; sourceTree = "<group>"; };
 		89E53F9C29DD13030033110F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		89E53F9E29DD13040033110F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89E53FA129DD13040033110F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		89E53FA329DD13040033110F /* Acrylic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Acrylic.entitlements; sourceTree = "<group>"; };
-		89E53FAD29DD13680033110F /* Acrylic File Provider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Acrylic File Provider.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89E53FA329DD13040033110F /* Acrylic (macOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Acrylic (macOS).entitlements"; sourceTree = "<group>"; };
+		89E53FAD29DD13680033110F /* Acrylic File Provider (macOS).appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Acrylic File Provider (macOS).appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89E53FAF29DD13680033110F /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		89E53FB229DD13680033110F /* FileProviderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderExtension.swift; sourceTree = "<group>"; };
 		89E53FB429DD13680033110F /* FileProviderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderItem.swift; sourceTree = "<group>"; };
@@ -92,6 +121,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		892F106A29DE28B900A61E24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				892F106E29DE28B900A61E24 /* UniformTypeIdentifiers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89E53F9429DD13030033110F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -110,12 +147,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		892F105229DE27B100A61E24 /* Acrylic File Provider (Shared) */ = {
+			isa = PBXGroup;
+			children = (
+				89E53FB229DD13680033110F /* FileProviderExtension.swift */,
+				89E53FB429DD13680033110F /* FileProviderItem.swift */,
+				89E53FD729DD39600033110F /* RootItem.swift */,
+				89E53FDA29DD3A100033110F /* CourseItem.swift */,
+				89E53FE029DD47DB0033110F /* FolderItem.swift */,
+				8916511E29DDC83900F65628 /* FileItem.swift */,
+				89E53FB629DD13680033110F /* EmptyEnumerator.swift */,
+				89E53FCE29DD36560033110F /* RootEnumerator.swift */,
+				89E53FDD29DD41EF0033110F /* FolderEnumerator.swift */,
+				89E53FE329DD49550033110F /* CourseEnumerator.swift */,
+				8916511C29DDBF2800F65628 /* WorkingSetEnumerator.swift */,
+				89E53FD429DD39550033110F /* Models.swift */,
+			);
+			path = "Acrylic File Provider (Shared)";
+			sourceTree = "<group>";
+		};
+		892F106F29DE28B900A61E24 /* Acrylic File Provider (iOS) */ = {
+			isa = PBXGroup;
+			children = (
+				892F107629DE28B900A61E24 /* Info.plist */,
+				892F107729DE28B900A61E24 /* Acrylic_File_Provider__iOS_.entitlements */,
+			);
+			path = "Acrylic File Provider (iOS)";
+			sourceTree = "<group>";
+		};
 		89E53F8E29DD13030033110F = {
 			isa = PBXGroup;
 			children = (
 				89E53FC129DD14B10033110F /* Shared */,
 				89E53F9929DD13030033110F /* Acrylic */,
-				89E53FB129DD13680033110F /* Acrylic File Provider */,
+				892F105229DE27B100A61E24 /* Acrylic File Provider (Shared) */,
+				89E53FB129DD13680033110F /* Acrylic File Provider (macOS) */,
+				892F106F29DE28B900A61E24 /* Acrylic File Provider (iOS) */,
 				89E53FAE29DD13680033110F /* Frameworks */,
 				89E53F9829DD13030033110F /* Products */,
 			);
@@ -125,7 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				89E53F9729DD13030033110F /* Acrylic.app */,
-				89E53FAD29DD13680033110F /* Acrylic File Provider.appex */,
+				89E53FAD29DD13680033110F /* Acrylic File Provider (macOS).appex */,
+				892F106D29DE28B900A61E24 /* Acrylic File Provider (iOS).appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,7 +206,8 @@
 				89E53FCB29DD26590033110F /* SignInView.swift */,
 				89E53FC829DD16120033110F /* AuthManager.swift */,
 				89E53F9E29DD13040033110F /* Assets.xcassets */,
-				89E53FA329DD13040033110F /* Acrylic.entitlements */,
+				89E53FA329DD13040033110F /* Acrylic (macOS).entitlements */,
+				892F105329DE281200A61E24 /* Acrylic (iOS).entitlements */,
 				89E53FA029DD13040033110F /* Preview Content */,
 			);
 			path = Acrylic;
@@ -160,25 +229,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		89E53FB129DD13680033110F /* Acrylic File Provider */ = {
+		89E53FB129DD13680033110F /* Acrylic File Provider (macOS) */ = {
 			isa = PBXGroup;
 			children = (
-				89E53FB229DD13680033110F /* FileProviderExtension.swift */,
-				89E53FB429DD13680033110F /* FileProviderItem.swift */,
-				89E53FD729DD39600033110F /* RootItem.swift */,
-				89E53FDA29DD3A100033110F /* CourseItem.swift */,
-				89E53FE029DD47DB0033110F /* FolderItem.swift */,
-				8916511E29DDC83900F65628 /* FileItem.swift */,
-				89E53FB629DD13680033110F /* EmptyEnumerator.swift */,
-				89E53FCE29DD36560033110F /* RootEnumerator.swift */,
-				89E53FDD29DD41EF0033110F /* FolderEnumerator.swift */,
-				89E53FE329DD49550033110F /* CourseEnumerator.swift */,
-				8916511C29DDBF2800F65628 /* WorkingSetEnumerator.swift */,
-				89E53FD429DD39550033110F /* Models.swift */,
 				89E53FB829DD13680033110F /* Info.plist */,
 				89E53FB929DD13680033110F /* Acrylic_File_Provider.entitlements */,
 			);
-			path = "Acrylic File Provider";
+			path = "Acrylic File Provider (macOS)";
 			sourceTree = "<group>";
 		};
 		89E53FC129DD14B10033110F /* Shared */ = {
@@ -194,6 +251,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		892F106C29DE28B900A61E24 /* Acrylic File Provider (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 892F108D29DE28B900A61E24 /* Build configuration list for PBXNativeTarget "Acrylic File Provider (iOS)" */;
+			buildPhases = (
+				892F106929DE28B900A61E24 /* Sources */,
+				892F106A29DE28B900A61E24 /* Frameworks */,
+				892F106B29DE28B900A61E24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Acrylic File Provider (iOS)";
+			productName = "Acrylic File Provider (iOS)";
+			productReference = 892F106D29DE28B900A61E24 /* Acrylic File Provider (iOS).appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		89E53F9629DD13030033110F /* Acrylic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89E53FA629DD13040033110F /* Build configuration list for PBXNativeTarget "Acrylic" */;
@@ -207,15 +281,16 @@
 			);
 			dependencies = (
 				89E53FBB29DD13680033110F /* PBXTargetDependency */,
+				892F108829DE28B900A61E24 /* PBXTargetDependency */,
 			);
 			name = Acrylic;
 			productName = Acrylic;
 			productReference = 89E53F9729DD13030033110F /* Acrylic.app */;
 			productType = "com.apple.product-type.application";
 		};
-		89E53FAC29DD13680033110F /* Acrylic File Provider */ = {
+		89E53FAC29DD13680033110F /* Acrylic File Provider (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 89E53FBD29DD13680033110F /* Build configuration list for PBXNativeTarget "Acrylic File Provider" */;
+			buildConfigurationList = 89E53FBD29DD13680033110F /* Build configuration list for PBXNativeTarget "Acrylic File Provider (macOS)" */;
 			buildPhases = (
 				89E53FA929DD13680033110F /* Sources */,
 				89E53FAA29DD13680033110F /* Frameworks */,
@@ -225,9 +300,9 @@
 			);
 			dependencies = (
 			);
-			name = "Acrylic File Provider";
+			name = "Acrylic File Provider (macOS)";
 			productName = "Acrylic File Provider";
-			productReference = 89E53FAD29DD13680033110F /* Acrylic File Provider.appex */;
+			productReference = 89E53FAD29DD13680033110F /* Acrylic File Provider (macOS).appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -240,6 +315,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					892F106C29DE28B900A61E24 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					89E53F9629DD13030033110F = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -262,12 +340,20 @@
 			projectRoot = "";
 			targets = (
 				89E53F9629DD13030033110F /* Acrylic */,
-				89E53FAC29DD13680033110F /* Acrylic File Provider */,
+				89E53FAC29DD13680033110F /* Acrylic File Provider (macOS) */,
+				892F106C29DE28B900A61E24 /* Acrylic File Provider (iOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		892F106B29DE28B900A61E24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89E53F9529DD13030033110F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -287,6 +373,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		892F106929DE28B900A61E24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				892F109529DE28E000A61E24 /* FolderItem.swift in Sources */,
+				892F109A29DE28E000A61E24 /* FileItem.swift in Sources */,
+				892F109929DE28E000A61E24 /* RootEnumerator.swift in Sources */,
+				892F109D29DE290900A61E24 /* TokenStorage.swift in Sources */,
+				892F109129DE28E000A61E24 /* WorkingSetEnumerator.swift in Sources */,
+				892F109E29DE290900A61E24 /* Constants.swift in Sources */,
+				892F109B29DE28E000A61E24 /* CourseEnumerator.swift in Sources */,
+				892F109229DE28E000A61E24 /* FileProviderExtension.swift in Sources */,
+				892F109729DE28E000A61E24 /* FileProviderItem.swift in Sources */,
+				892F109429DE28E000A61E24 /* RootItem.swift in Sources */,
+				892F109C29DE290900A61E24 /* API.swift in Sources */,
+				892F109829DE28E000A61E24 /* EmptyEnumerator.swift in Sources */,
+				892F109029DE28E000A61E24 /* FolderEnumerator.swift in Sources */,
+				892F109329DE28E000A61E24 /* CourseItem.swift in Sources */,
+				892F109629DE28E000A61E24 /* Models.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89E53F9329DD13030033110F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,14 +436,80 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		892F108829DE28B900A61E24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 892F106C29DE28B900A61E24 /* Acrylic File Provider (iOS) */;
+			targetProxy = 892F108729DE28B900A61E24 /* PBXContainerItemProxy */;
+		};
 		89E53FBB29DD13680033110F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 89E53FAC29DD13680033110F /* Acrylic File Provider */;
+			platformFilters = (
+				macos,
+			);
+			target = 89E53FAC29DD13680033110F /* Acrylic File Provider (macOS) */;
 			targetProxy = 89E53FBA29DD13680033110F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		892F108E29DE28B900A61E24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (iOS)/Acrylic_File_Provider__iOS_.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9G475R3MEF;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Acrylic File Provider (iOS)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Acrylic File Provider (iOS)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.anli.macos.Acrylic.Acrylic-File-Provider--iOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		892F108F29DE28B900A61E24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (iOS)/Acrylic_File_Provider__iOS_.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9G475R3MEF;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Acrylic File Provider (iOS)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Acrylic File Provider (iOS)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.anli.macos.Acrylic.Acrylic-File-Provider--iOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		89E53FA429DD13040033110F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -455,7 +629,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Acrylic/Acrylic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "Acrylic/Acrylic (iOS).entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Acrylic/Acrylic (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -465,6 +641,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -472,8 +650,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.anli.macos.Acrylic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -483,7 +665,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Acrylic/Acrylic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "Acrylic/Acrylic (iOS).entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Acrylic/Acrylic (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -493,6 +677,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -500,21 +686,25 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.anli.macos.Acrylic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		89E53FBE29DD13680033110F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider/Acrylic_File_Provider.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (macOS)/Acrylic_File_Provider.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Acrylic File Provider/Info.plist";
+				INFOPLIST_FILE = "Acrylic File Provider (macOS)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Acrylic File Provider";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -534,13 +724,13 @@
 		89E53FBF29DD13680033110F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider/Acrylic_File_Provider.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (macOS)/Acrylic_File_Provider.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Acrylic File Provider/Info.plist";
+				INFOPLIST_FILE = "Acrylic File Provider (macOS)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Acrylic File Provider";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -560,6 +750,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		892F108D29DE28B900A61E24 /* Build configuration list for PBXNativeTarget "Acrylic File Provider (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				892F108E29DE28B900A61E24 /* Debug */,
+				892F108F29DE28B900A61E24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		89E53F9229DD13030033110F /* Build configuration list for PBXProject "Acrylic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -578,7 +777,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		89E53FBD29DD13680033110F /* Build configuration list for PBXNativeTarget "Acrylic File Provider" */ = {
+		89E53FBD29DD13680033110F /* Build configuration list for PBXNativeTarget "Acrylic File Provider (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				89E53FBE29DD13680033110F /* Debug */,

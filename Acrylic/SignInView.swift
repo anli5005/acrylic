@@ -22,7 +22,10 @@ struct SignInView: View {
     var body: some View {
         VStack {
             if isOnWebView {
-                SignInWebView(baseHost: baseHost).frame(maxWidth: .infinity, minHeight: 400, maxHeight: 400).border(.separator)
+                SignInWebView(baseHost: baseHost).frame(maxWidth: .infinity, minHeight: 400)
+                #if os(macOS)
+                    .border(.separator)
+                #endif
                 HStack {
                     Button("Back") {
                         isOnWebView = false
@@ -42,7 +45,9 @@ struct SignInView: View {
                 }
             }
         }
+        #if os(macOS)
         .frame(minWidth: 400, idealWidth: 600)
+        #endif
         .padding()
     }
 }
@@ -52,18 +57,25 @@ private struct SignInWebView: NativeViewRepresentable {
     
     var baseHost: String
     
+    #if os(macOS)
     func makeNSView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.websiteDataStore = .nonPersistent()
         let view = WKWebView(frame: .zero, configuration: configuration)
-        #if os(macOS)
         updateNSView(view, context: context)
-        #else
-        updateUIView(view, context: context)
-        #endif
         view.load(URLRequest(url: URL(string: "https://\(baseHost)")!))
         return view
     }
+    #else
+    func makeUIView(context: Context) -> WKWebView {
+        let configuration = WKWebViewConfiguration()
+        configuration.websiteDataStore = .nonPersistent()
+        let view = WKWebView(frame: .zero, configuration: configuration)
+        updateUIView(view, context: context)
+        view.load(URLRequest(url: URL(string: "https://\(baseHost)")!))
+        return view
+    }
+    #endif
     
     #if os(macOS)
     func updateNSView(_ nsView: WKWebView, context: Context) {

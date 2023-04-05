@@ -27,8 +27,8 @@ class RootFileProviderEnumerator: NSObject, NSFileProviderEnumerator {
                     CourseItem(course: $0)
                 })
                 observer.finishEnumerating(upTo: nil)
-            } catch let e {
-                observer.finishEnumeratingWithError(e)
+            } catch {
+                observer.finishEnumeratingWithError(NSFileProviderError(.notAuthenticated))
             }
         }
     }

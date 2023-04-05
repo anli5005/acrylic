@@ -12,9 +12,16 @@ struct AcrylicApp: App {
     @State var authManager = AuthManager()
     
     var body: some Scene {
+        #if os(macOS)
         Window("Acrylic", id: "acrylic") {
             ContentView()
                 .environmentObject(authManager)
         }
+        #else
+        WindowGroup {
+            ContentView()
+                .environmentObject(authManager)
+        }
+        #endif
     }
 }

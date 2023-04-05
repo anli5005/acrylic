@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "89E53FAC29DD13680033110F"
-               BuildableName = "Acrylic File Provider.appex"
-               BlueprintName = "Acrylic File Provider"
+               BuildableName = "Acrylic File Provider (macOS).appex"
+               BlueprintName = "Acrylic File Provider (macOS)"
                ReferencedContainer = "container:Acrylic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
