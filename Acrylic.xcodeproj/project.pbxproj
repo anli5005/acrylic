@@ -458,13 +458,13 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (iOS)/Acrylic_File_Provider__iOS_.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023.4.6;
+				CURRENT_PROJECT_VERSION = 2023.4.7;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Acrylic File Provider (iOS)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Acrylic File Provider (iOS)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -486,13 +486,13 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (iOS)/Acrylic_File_Provider__iOS_.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023.4.6;
+				CURRENT_PROJECT_VERSION = 2023.4.7;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Acrylic File Provider (iOS)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Acrylic File Provider (iOS)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -634,7 +634,7 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Acrylic/Acrylic (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2023.4.6;
+				CURRENT_PROJECT_VERSION = 2023.4.7;
 				DEVELOPMENT_ASSET_PATHS = "\"Acrylic/Preview Content\"";
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -643,10 +643,12 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.anli.macos.Acrylic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -670,7 +672,7 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Acrylic/Acrylic (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2023.4.6;
+				CURRENT_PROJECT_VERSION = 2023.4.7;
 				DEVELOPMENT_ASSET_PATHS = "\"Acrylic/Preview Content\"";
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -679,10 +681,12 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.anli.macos.Acrylic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -700,7 +704,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (macOS)/Acrylic_File_Provider.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023.4.6;
+				CURRENT_PROJECT_VERSION = 2023.4.7;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -712,6 +716,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.anli.macos.Acrylic.Acrylic-File-Provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -726,7 +731,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (macOS)/Acrylic_File_Provider.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023.4.6;
+				CURRENT_PROJECT_VERSION = 2023.4.7;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -738,6 +743,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.anli.macos.Acrylic.Acrylic-File-Provider";
 				PRODUCT_NAME = "$(TARGET_NAME)";
