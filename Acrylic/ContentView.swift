@@ -11,6 +11,10 @@ import FileProvider
 struct ContentView: View {
     @EnvironmentObject var authManager: AuthManager
     
+    #if os(macOS)
+    @Environment(\.openWindow) var openWindow
+    #endif
+    
     var body: some View {
         VStack {
             switch authManager.state {
@@ -24,6 +28,11 @@ struct ContentView: View {
                 ProgressView("Signing in")
             case .signedIn:
                 Text("Signed in")
+                #if os(macOS)
+                Button("Debug Assistant...") {
+                    openWindow(id: "debug-assistant")
+                }
+                #endif
                 Button("Try installing file provider") {
                     NSFileProviderManager.add(Constants.domain) { error in
                         if let error {

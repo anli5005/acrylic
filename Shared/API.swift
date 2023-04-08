@@ -10,35 +10,13 @@ import Foundation
 enum API {
     static var cachedSession: URLSession?
     
-    @MainActor static func getSession() -> URLSession {
-        guard let baseHost else {
-            cachedSession = nil
-            return URLSession.shared
+    static func request(for url: URL) -> URLRequest {
+        var request = URLRequest(url: url)
+        if let token = TokenStorage.retrieveSessionCookie() {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         
-        print("getSession() called")
-        
-        if let cachedSession {
-            let cookie = HTTPCookie(properties: [
-                .name: "canvas_session",
-                .value: TokenStorage.retrieveSessionCookie() ?? "",
-                .path: "/",
-                .domain: baseHost
-            ])!
-            cachedSession.configuration.httpCookieStorage!.setCookie(cookie)
-            return cachedSession
-        }
-        
-        let session = URLSession(configuration: .ephemeral)
-        let cookie = HTTPCookie(properties: [
-            .name: "canvas_session",
-            .value: TokenStorage.retrieveSessionCookie() ?? "",
-            .path: "/",
-            .domain: baseHost
-        ])!
-        session.configuration.httpCookieStorage!.setCookie(cookie)
-        cachedSession = session
-        return session
+        return request
     }
     
     static var baseHost: String? {

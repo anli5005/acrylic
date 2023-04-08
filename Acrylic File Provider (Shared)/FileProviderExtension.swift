@@ -35,35 +35,26 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
             if identifier == NSFileProviderItemIdentifier.rootContainer {
                 return RootItem()
             } else if identifier.rawValue.starts(with: "course-") {
-                let session = await API.getSession()
-                var request = URLRequest(url: URL(string: "https://\(baseHost)/courses")!)
-                request.setValue("application/json", forHTTPHeaderField: "Accept")
-                let (data, _) = try await session.data(for: request)
-                let courses = try JSONDecoder().decode([Course].self, from: data)
-                if let course = courses.first(where: { "course-\($0.id)" == identifier.rawValue }) {
-                    return CourseItem(course: course)
-                }
+                let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/courses/\(identifier.rawValue.split(separator: "-")[1])")!)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                let course = try JSONDecoder().decode(Course.self, from: data)
+                return CourseItem(course: course)
             } else if identifier.rawValue.starts(with: "folder-") {
-                let session = await API.getSession()
-                var request = URLRequest(url: URL(string: "https://\(baseHost)/api/v1/folders/\(identifier.rawValue.split(separator: "-")[1])")!)
-                request.setValue("application/json", forHTTPHeaderField: "Accept")
-                let (data, _) = try await session.data(for: request)
+                let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/folders/\(identifier.rawValue.split(separator: "-")[1])")!)
+                let (data, _) = try await URLSession.shared.data(for: request)
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
                 let folder = try decoder.decode(Folder.self, from: data)
                 return FolderItem(folder: folder)
             } else if identifier.rawValue.starts(with: "file-") {
-                let session = await API.getSession()
-                var request = URLRequest(url: URL(string: "https://\(baseHost)/api/v1/files/\(identifier.rawValue.split(separator: "-")[1])")!)
-                request.setValue("application/json", forHTTPHeaderField: "Accept")
-                let (data, _) = try await session.data(for: request)
+                var request = API.request(for: URL(string: "https://\(baseHost)/api/v1/files/\(identifier.rawValue.split(separator: "-")[1])")!)
+                let (data, _) = try await URLSession.shared.data(for: request)
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
                 let file = try decoder.decode(File.self, from: data)
                 
-                request = URLRequest(url: URL(string: "https://\(baseHost)/api/v1/folders/\(file.folder_id)")!)
-                request.setValue("application/json", forHTTPHeaderField: "Accept")
-                let (data2, _) = try await session.data(for: request)
+                request = API.request(for: URL(string: "https://\(baseHost)/api/v1/folders/\(file.folder_id)")!)
+                let (data2, _) = try await URLSession.shared.data(for: request)
                 let parent = try decoder.decode(Folder.self, from: data2)
                 
                 return FileItem(file: file, overrideParent: parent.parent_folder_id == nil ? NSFileProviderItemIdentifier("course-\(parent.context_id)") : nil)
@@ -96,23 +87,22 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
                 return
             }
             
-            let session = await API.getSession()
-            var request = URLRequest(url: URL(string: "https://\(baseHost)/api/v1/files/\(itemIdentifier.rawValue.split(separator: "-")[1])")!)
+            var request = API.request(for: URL(string: "https://\(baseHost)/api/v1/files/\(itemIdentifier.rawValue.split(separator: "-")[1])")!)
             request.setValue("application/json", forHTTPHeaderField: "Accept")
-            let (data, _) = try await session.data(for: request)
+            let (data, _) = try await URLSession.shared.data(for: request)
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             let file = try decoder.decode(File.self, from: data)
             
-            let (url, response) = try await session.download(from: file.url)
+            let (url, response) = try await URLSession.shared.download(for: API.request(for: file.url))
             
             if (response as? HTTPURLResponse)?.statusCode != 200 {
                 completionHandler(nil, nil, NSError(domain: NSCocoaErrorDomain, code: NSFileReadNoPermissionError))
             }
             
-            request = URLRequest(url: URL(string: "https://\(baseHost)/api/v1/folders/\(file.folder_id)")!)
+            request = API.request(for: URL(string: "https://\(baseHost)/api/v1/folders/\(file.folder_id)")!)
             request.setValue("application/json", forHTTPHeaderField: "Accept")
-            let (data2, _) = try await session.data(for: request)
+            let (data2, _) = try await URLSession.shared.data(for: request)
             let parent = try decoder.decode(Folder.self, from: data2)
             
             completionHandler(url, FileItem(file: file, overrideParent: parent.parent_folder_id == nil ? NSFileProviderItemIdentifier("course-\(parent.context_id)") : nil), nil)

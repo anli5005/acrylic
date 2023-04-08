@@ -27,10 +27,8 @@ class CourseEnumerator: NSObject, NSFileProviderEnumerator {
         Task {
             do {
                 if folderEnumerator == nil {
-                    let session = await API.getSession()
-                    var request = URLRequest(url: URL(string: "https://\(baseHost)/api/v1/courses/\(courseIdentifier)/folders/root")!)
-                    request.setValue("application/json", forHTTPHeaderField: "Accept")
-                    let (data, _) = try await session.data(for: request)
+                    let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/courses/\(courseIdentifier)/folders/root")!)
+                    let (data, _) = try await URLSession.shared.data(for: request)
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .iso8601
                     let folder = try decoder.decode(Folder.self, from: data)

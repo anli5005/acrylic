@@ -17,99 +17,77 @@ typealias NativeViewRepresentable = UIViewRepresentable
 struct SignInView: View {
     @EnvironmentObject var authManager: AuthManager
     @State var baseHost: String = ""
-    @State var isOnWebView = false
+    @State var token: String = ""
+    @State var isAskingForToken = false
+    
+    var tokenURL: String {
+        return "https://\(baseHost)/profile/settings"
+    }
     
     var body: some View {
-        VStack {
-            if isOnWebView {
-                SignInWebView(baseHost: baseHost).frame(maxWidth: .infinity, minHeight: 400)
-                #if os(macOS)
-                    .border(.separator)
-                #endif
-                HStack {
-                    Button("Back") {
-                        isOnWebView = false
-                    }.controlSize(.large)
-                }
-            } else {
-                Text("Enter a Canvas URL").font(.title).fontWeight(.bold)
-                TextField("canvas.upenn.edu", text: $baseHost).frame(width: 200).controlSize(.large)
-                HStack {
-                    Button("Cancel") {
-                        authManager.cancelSigningIn()
-                    }.controlSize(.large)
-                    Button("Next") {
-                        isOnWebView = true
-                    }.controlSize(.large).keyboardShortcut(.defaultAction)
-                        .disabled(baseHost.isEmpty || URL(string: "https://\(baseHost)/test/test?param=hi") == nil)
-                }
-            }
-        }
-        #if os(macOS)
-        .frame(minWidth: 400, idealWidth: 600)
-        #endif
-        .padding()
-    }
-}
-
-private struct SignInWebView: NativeViewRepresentable {
-    @EnvironmentObject var authManager: AuthManager
-    
-    var baseHost: String
-    
-    #if os(macOS)
-    func makeNSView(context: Context) -> WKWebView {
-        let configuration = WKWebViewConfiguration()
-        configuration.websiteDataStore = .nonPersistent()
-        let view = WKWebView(frame: .zero, configuration: configuration)
-        updateNSView(view, context: context)
-        view.load(URLRequest(url: URL(string: "https://\(baseHost)")!))
-        return view
-    }
-    #else
-    func makeUIView(context: Context) -> WKWebView {
-        let configuration = WKWebViewConfiguration()
-        configuration.websiteDataStore = .nonPersistent()
-        let view = WKWebView(frame: .zero, configuration: configuration)
-        updateUIView(view, context: context)
-        view.load(URLRequest(url: URL(string: "https://\(baseHost)")!))
-        return view
-    }
-    #endif
-    
-    #if os(macOS)
-    func updateNSView(_ nsView: WKWebView, context: Context) {
-        nsView.navigationDelegate = context.coordinator
-    }
-    #else
-    func updateUIView(_ nsView: WKWebView, context: Context) {
-        nsView.navigationDelegate = context.coordinator
-    }
-    #endif
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, WKNavigationDelegate {
-        let parent: SignInWebView
-        
-        init(_ parent: SignInWebView) {
-            self.parent = parent
-        }
-        
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            if webView.url?.host() == parent.baseHost {
-                webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
-                    if let cookie = cookies.first(where: { $0.name == "canvas_session" }) {
-                        DispatchQueue.main.async {
-                            if let self {
-                                self.parent.authManager.finishSigningIn(with: cookie.value, on: self.parent.baseHost)
+        Group {
+            if isAskingForToken {
+                VStack(spacing: 12) {
+                    Text("Paste in Access Token").font(.title).fontWeight(.bold)
+                    Text("Acrylic uses an access token to identify itself to Canvas.")
+                    Text(.init("To obtain a token, go to [\(tokenURL)](\(tokenURL)#access_tokens), then scroll to **Approved Integrations** and click **New Access Token**."))
+                    Text("Once generated, you can copy and paste it here.")
+                    
+                    Image(systemName: "key.fill")
+                        .resizable()
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(.accentColor)
+                        .scaledToFit()
+                        .frame(maxHeight: 100)
+                        .frame(maxHeight: .infinity)
+                    
+                    TextField("Paste token here...", text: $token).font(.body.monospaced()).frame(maxWidth: .infinity)
+                    HStack {
+                        Button("Back") {
+                            withAnimation {
+                                isAskingForToken = false
                             }
-                        }
+                        }.controlSize(.large)
+                        Button("Finish") {
+                            authManager.finishSigningIn(with: token, on: baseHost)
+                        }.controlSize(.large).keyboardShortcut(.defaultAction)
+                            .disabled(token.isEmpty)
                     }
-                }
+                }.frame(maxWidth: .infinity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+            } else {
+                VStack(spacing: 12) {
+                    Text("Enter a Canvas URL").font(.title).fontWeight(.bold)
+                    Text("Enter the URL you use to log in to your university's Canvas instance.")
+                    
+                    Image(systemName: "link.circle.fill")
+                        .resizable()
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(.accentColor)
+                        .scaledToFit()
+                        .frame(maxHeight: 100)
+                        .frame(maxHeight: .infinity)
+                    
+                    TextField("canvas.myuniversity.edu", text: $baseHost).frame(width: 200).controlSize(.large)
+                    HStack {
+                        Button("Cancel") {
+                            authManager.cancelSigningIn()
+                        }.controlSize(.large)
+                        Button("Next") {
+                            withAnimation {
+                                isAskingForToken = true
+                            }
+                        }.controlSize(.large).keyboardShortcut(.defaultAction)
+                            .disabled(baseHost.isEmpty || URL(string: "https://\(baseHost)/test/test?param=hi") == nil)
+                    }
+                }.frame(maxWidth: .infinity).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
         }
+        .multilineTextAlignment(.center)
+        .lineLimit(nil)
+        #if os(macOS)
+        .frame(width: 540, height: 360)
+        #endif
+        .padding(.vertical, 24)
+        .padding(.horizontal, 48)
     }
 }

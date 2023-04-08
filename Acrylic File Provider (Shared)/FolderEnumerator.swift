@@ -72,11 +72,9 @@ class FolderEnumerator: NSObject, NSFileProviderEnumerator {
                     }
                 }
                 
-                let session = await API.getSession()
-                var request = URLRequest(url: URL(string: "https://\(baseHost)/api/v1/folders/\(self.folderIdentifier)/\(endpoint)?per_page=\(Self.perPage)&page=\(pageIndex)")!)
+                let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/folders/\(self.folderIdentifier)/\(endpoint)?per_page=\(Self.perPage)&page=\(pageIndex)")!)
                 
-                request.setValue("application/json", forHTTPHeaderField: "Accept")
-                let (data, _) = try await session.data(for: request)
+                let (data, _) = try await URLSession.shared.data(for: request)
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .custom { keys in
                     if keys.last!.stringValue == "content-type" {

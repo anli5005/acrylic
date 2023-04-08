@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FileProvider
 
 struct Course: Decodable {
     var id: Int
@@ -33,4 +34,32 @@ struct File: Decodable {
     var created_at: Date
     var updated_at: Date
     var url: URL
+}
+
+extension Course {
+    static func fetch() async throws -> [Course] {
+        guard let baseHost = API.baseHost else {
+            throw NSFileProviderError(NSFileProviderError.notAuthenticated)
+        }
+        
+        var courses = [Course]()
+        let decoder = JSONDecoder()
+        var page = 1
+        while true {
+            let url = URL(string: "https://\(baseHost)/api/v1/courses?per_page=100&page=\(page)")!
+            let (data, _) = try await URLSession.shared.data(for: API.request(for: url))
+            do {
+                let dataCourses = try decoder.decode([Course].self, from: data)
+                courses.append(contentsOf: dataCourses)
+                if dataCourses.count < 100 {
+                    break
+                }
+                page += 1
+            } catch {
+                throw NSFileProviderError(NSFileProviderError.notAuthenticated)
+            }
+        }
+        
+        return courses
+    }
 }

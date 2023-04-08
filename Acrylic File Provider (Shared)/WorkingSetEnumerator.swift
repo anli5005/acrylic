@@ -39,17 +39,18 @@ class WorkingSetEnumerator: NSObject, NSFileProviderEnumerator {
             do {
                 let endpoint: String
                 let pageIndex: Int
-                let session = await API.getSession()
                 if page.rawValue == NSFileProviderPage.initialPageSortedByDate as Data || page.rawValue == NSFileProviderPage.initialPageSortedByName as Data {
                     print("RESTARTING ENUMERATION")
-                    var request = URLRequest(url: URL(string: "https://\(baseHost)/courses")!)
-                    request.setValue("application/json", forHTTPHeaderField: "Accept")
-                    let (data, _) = try await session.data(for: request)
-                    let courses = try JSONDecoder().decode([Course].self, from: data)
-                    observer.didEnumerate(courses.map {
-                        CourseItem(course: $0)
-                    })
-                    try observer.finishEnumerating(upTo: courses.first.map { _ in try Page(courseIds: courses.map(\.id), currentIndex: 0, coursePage: .folderPage(1), rootFolder: nil).asPage() })
+                    do {
+                        let courses = try await Course.fetch()
+                        observer.didEnumerate(courses.map {
+                            CourseItem(course: $0)
+                        })
+                        try observer.finishEnumerating(upTo: courses.first.map { _ in try Page(courseIds: courses.map(\.id), currentIndex: 0, coursePage: .folderPage(1), rootFolder: nil).asPage() })
+                    } catch let e {
+                        observer.finishEnumeratingWithError(e)
+                    }
+                    
                     return
                 }
                 let parsedPage = try Page.from(page: page)
@@ -64,11 +65,9 @@ class WorkingSetEnumerator: NSObject, NSFileProviderEnumerator {
                 
                 print("Now enumerating \(endpoint) page \(pageIndex) from \(parsedPage.currentIndex)")
                 
-                var request = URLRequest(url: URL(string: "https://\(baseHost)/api/v1/courses/\(parsedPage.courseIds[parsedPage.currentIndex])/\(endpoint)?per_page=\(Self.perPage)&page=\(pageIndex)")!)
-                
-                request.setValue("application/json", forHTTPHeaderField: "Accept")
-                
-                let result = try? await session.data(for: request)
+                let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/courses/\(parsedPage.courseIds[parsedPage.currentIndex])/\(endpoint)?per_page=\(Self.perPage)&page=\(pageIndex)")!)
+                                
+                let result = try? await URLSession.shared.data(for: request)
                 let data = result?.0 ?? Data()
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .custom { keys in

@@ -17,6 +17,9 @@ struct AcrylicApp: App {
             ContentView()
                 .environmentObject(authManager)
         }
+        Window("Debug Assistant", id: "debug-assistant") {
+            DebugAssistantView()
+        }
         #else
         WindowGroup {
             ContentView()
