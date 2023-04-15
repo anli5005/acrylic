@@ -38,6 +38,11 @@ struct File: Decodable {
 
 extension Course {
     static func fetch() async throws -> [Course] {
+        struct TempCourse: Decodable {
+            var id: Int
+            var name: String?
+        }
+        
         guard let baseHost = API.baseHost else {
             throw NSFileProviderError(NSFileProviderError.notAuthenticated)
         }
@@ -49,8 +54,14 @@ extension Course {
             let url = URL(string: "https://\(baseHost)/api/v1/courses?per_page=100&page=\(page)")!
             let (data, _) = try await URLSession.shared.data(for: API.request(for: url))
             do {
-                let dataCourses = try decoder.decode([Course].self, from: data)
-                courses.append(contentsOf: dataCourses)
+                let dataCourses = try decoder.decode([TempCourse].self, from: data)
+                courses.append(contentsOf: dataCourses.compactMap{
+                    guard let name = $0.name
+                    else{
+                        return nil
+                    }
+                    return Course(id:$0.id, name:name)
+                })
                 if dataCourses.count < 100 {
                     break
                 }

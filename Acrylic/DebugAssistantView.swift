@@ -52,7 +52,7 @@ struct DebugAssistantView: View {
             result = nil
             
             do {
-                let request = API.request(for: URL(string: "https://\(API.baseHost ?? "")/api/v1/courses")!)
+                let request = API.request(for: URL(string: "https://\(API.baseHost ?? "")/api/v1/courses?per_page=100")!)
                 let (data, _) = try await URLSession.shared.data(for: request)
                 result = .success(data)
             } catch let e {
