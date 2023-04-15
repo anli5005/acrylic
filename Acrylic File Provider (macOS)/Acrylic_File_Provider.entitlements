@@ -8,7 +8,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>9G475R3MEF.dev.anli.macos.AcrylicGroup</string>
+		<string>$(TeamIdentifierPrefix)dev.anli.macos.AcrylicGroup</string>
 	</array>
 	<key>com.apple.security.network.client</key>
 	<true/>

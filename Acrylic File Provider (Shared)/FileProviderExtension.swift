@@ -77,35 +77,39 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
     
     func fetchContents(for itemIdentifier: NSFileProviderItemIdentifier, version requestedVersion: NSFileProviderItemVersion?, request: NSFileProviderRequest, completionHandler: @escaping (URL?, NSFileProviderItem?, Error?) -> Void) -> Progress {
         Task {
-            guard let baseHost = API.baseHost else {
-                completionHandler(nil, nil,  NSFileProviderError(NSFileProviderError.notAuthenticated))
-                return
+            do {
+                guard let baseHost = API.baseHost else {
+                    completionHandler(nil, nil,  NSFileProviderError(NSFileProviderError.notAuthenticated))
+                    return
+                }
+                
+                guard itemIdentifier.rawValue.starts(with: "file-") else {
+                    completionHandler(nil, nil, NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo:[:]))
+                    return
+                }
+                
+                var request = API.request(for: URL(string: "https://\(baseHost)/api/v1/files/\(itemIdentifier.rawValue.split(separator: "-")[1])")!)
+                request.setValue("application/json", forHTTPHeaderField: "Accept")
+                let (data, _) = try await URLSession.shared.data(for: request)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let file = try decoder.decode(File.self, from: data)
+                
+                let (url, response) = try await URLSession.shared.download(for: API.request(for: file.url))
+                
+                if (response as? HTTPURLResponse)?.statusCode != 200 {
+                    completionHandler(nil, nil, NSError(domain: NSCocoaErrorDomain, code: NSFileReadNoPermissionError))
+                }
+                
+                request = API.request(for: URL(string: "https://\(baseHost)/api/v1/folders/\(file.folder_id)")!)
+                request.setValue("application/json", forHTTPHeaderField: "Accept")
+                let (data2, _) = try await URLSession.shared.data(for: request)
+                let parent = try decoder.decode(Folder.self, from: data2)
+                
+                completionHandler(url, FileItem(file: file, overrideParent: parent.parent_folder_id == nil ? NSFileProviderItemIdentifier("course-\(parent.context_id)") : nil), nil)
+            } catch let e {
+                completionHandler(nil, nil, e)
             }
-            
-            guard itemIdentifier.rawValue.starts(with: "file-") else {
-                completionHandler(nil, nil, NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo:[:]))
-                return
-            }
-            
-            var request = API.request(for: URL(string: "https://\(baseHost)/api/v1/files/\(itemIdentifier.rawValue.split(separator: "-")[1])")!)
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            let (data, _) = try await URLSession.shared.data(for: request)
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            let file = try decoder.decode(File.self, from: data)
-            
-            let (url, response) = try await URLSession.shared.download(for: API.request(for: file.url))
-            
-            if (response as? HTTPURLResponse)?.statusCode != 200 {
-                completionHandler(nil, nil, NSError(domain: NSCocoaErrorDomain, code: NSFileReadNoPermissionError))
-            }
-            
-            request = API.request(for: URL(string: "https://\(baseHost)/api/v1/folders/\(file.folder_id)")!)
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            let (data2, _) = try await URLSession.shared.data(for: request)
-            let parent = try decoder.decode(Folder.self, from: data2)
-            
-            completionHandler(url, FileItem(file: file, overrideParent: parent.parent_folder_id == nil ? NSFileProviderItemIdentifier("course-\(parent.context_id)") : nil), nil)
         }
         return Progress()
     }
@@ -147,13 +151,17 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
     }
 }
 
+private struct SyncAnchorData: Codable {
+    var date = Date()
+}
+
 func createSyncAnchor() -> NSFileProviderSyncAnchor? {
-    try? NSFileProviderSyncAnchor(PropertyListEncoder().encode(Date()))
+    try? NSFileProviderSyncAnchor(PropertyListEncoder().encode(SyncAnchorData()))
 }
 
 func handleChangeEnumerator(for observer: NSFileProviderChangeObserver, from anchor: NSFileProviderSyncAnchor) {
-    if let date = try? PropertyListDecoder().decode(Date.self, from: anchor.rawValue) {
-        if date.timeIntervalSinceNow < -120 {
+    if let data = try? PropertyListDecoder().decode(SyncAnchorData.self, from: anchor.rawValue) {
+        if data.date.timeIntervalSinceNow < -120 {
             observer.finishEnumeratingWithError(NSFileProviderError(.syncAnchorExpired))
             return
         }

@@ -10,7 +10,13 @@ import FileProvider
 
 enum Constants {
     #if os(macOS)
-    static let groupIdentifier = "9G475R3MEF.dev.anli.macos.AcrylicGroup"
+    static let groupIdentifier: String = {
+        guard let object = Bundle.main.object(forInfoDictionaryKey: "TEAM_IDENTIFIER") as? String else {
+            fatalError("Unable to read team identifier from Info.plist")
+        }
+        
+        return "\(object)dev.anli.macos.AcrylicGroup"
+    }()
     #else
     static let groupIdentifier = "group.dev.anli.macos.AcrylicGroup"
     #endif
