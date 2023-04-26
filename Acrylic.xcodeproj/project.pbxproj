@@ -464,7 +464,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (iOS)/Acrylic_File_Provider__iOS_.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023.4.24;
+				CURRENT_PROJECT_VERSION = 2023.4.26;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Acrylic File Provider (iOS)/Info.plist";
@@ -492,7 +492,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (iOS)/Acrylic_File_Provider__iOS_.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023.4.24;
+				CURRENT_PROJECT_VERSION = 2023.4.26;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Acrylic File Provider (iOS)/Info.plist";
@@ -640,7 +640,7 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Acrylic/Acrylic (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2023.4.24;
+				CURRENT_PROJECT_VERSION = 2023.4.26;
 				DEVELOPMENT_ASSET_PATHS = "\"Acrylic/Preview Content\"";
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -679,7 +679,7 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Acrylic/Acrylic (macOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2023.4.24;
+				CURRENT_PROJECT_VERSION = 2023.4.26;
 				DEVELOPMENT_ASSET_PATHS = "\"Acrylic/Preview Content\"";
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -712,7 +712,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (macOS)/Acrylic_File_Provider.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023.4.24;
+				CURRENT_PROJECT_VERSION = 2023.4.26;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -739,7 +739,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Acrylic File Provider (macOS)/Acrylic_File_Provider.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023.4.24;
+				CURRENT_PROJECT_VERSION = 2023.4.26;
 				DEVELOPMENT_TEAM = 9G475R3MEF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
