@@ -12,7 +12,7 @@ class WorkingSetEnumerator: NSObject, NSFileProviderEnumerator {
     let rootEnumerator = RootFileProviderEnumerator()
     
     struct Page: Codable {
-        let courses: [Course]
+        let courseIds: [Int]
         let currentIndex: Int
         let coursePage: FolderEnumerator.Page
         let rootFolder: Int?
@@ -43,7 +43,10 @@ class WorkingSetEnumerator: NSObject, NSFileProviderEnumerator {
                     print("RESTARTING ENUMERATION")
                     do {
                         let courses = try await Course.fetch()
-                        try observer.finishEnumerating(upTo: courses.first.map { _ in try Page(courses: courses, currentIndex: 0, coursePage: .folderPage(1), rootFolder: nil).asPage() })
+                        observer.didEnumerate(courses.map {
+                            CourseItem(course: $0)
+                        })
+                        try observer.finishEnumerating(upTo: courses.first.map { _ in try Page(courseIds: courses.map(\.id), currentIndex: 0, coursePage: .folderPage(1), rootFolder: nil).asPage() })
                     } catch let e {
                         observer.finishEnumeratingWithError(e)
                     }
@@ -62,7 +65,7 @@ class WorkingSetEnumerator: NSObject, NSFileProviderEnumerator {
                 
                 print("Now enumerating \(endpoint) page \(pageIndex) from \(parsedPage.currentIndex)")
                 
-                let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/courses/\(parsedPage.courses[parsedPage.currentIndex].id)/\(endpoint)?per_page=\(Self.perPage)&page=\(pageIndex)")!)
+                let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/courses/\(parsedPage.courseIds[parsedPage.currentIndex])/\(endpoint)?per_page=\(Self.perPage)&page=\(pageIndex)")!)
                                 
                 let result = try? await URLSession.shared.data(for: request)
                 let data = result?.0 ?? Data()
@@ -78,32 +81,29 @@ class WorkingSetEnumerator: NSObject, NSFileProviderEnumerator {
                 
                 if endpoint == "folders" {
                     let folders = (try? decoder.decode([Folder].self, from: data)) ?? []
-                    if pageIndex == 1 {
-                        observer.didEnumerate([CourseItem(course: parsedPage.courses[parsedPage.currentIndex])])
-                    }
                     observer.didEnumerate(folders.filter {
                         $0.parent_folder_id != nil
                     }.map {
                         FolderItem(folder: $0)
                     })
                     if folders.isEmpty {
-                        try observer.finishEnumerating(upTo: Page(courses: parsedPage.courses, currentIndex: parsedPage.currentIndex, coursePage: .filePage(1), rootFolder: parsedPage.rootFolder).asPage())
+                        try observer.finishEnumerating(upTo: Page(courseIds: parsedPage.courseIds, currentIndex: parsedPage.currentIndex, coursePage: .filePage(1), rootFolder: parsedPage.rootFolder).asPage())
                     } else {
-                        try observer.finishEnumerating(upTo: Page(courses: parsedPage.courses, currentIndex: parsedPage.currentIndex, coursePage: .folderPage(pageIndex + 1), rootFolder: folders.first(where: { $0.parent_folder_id == nil })?.id ?? parsedPage.rootFolder).asPage())
+                        try observer.finishEnumerating(upTo: Page(courseIds: parsedPage.courseIds, currentIndex: parsedPage.currentIndex, coursePage: .folderPage(pageIndex + 1), rootFolder: folders.first(where: { $0.parent_folder_id == nil })?.id ?? parsedPage.rootFolder).asPage())
                     }
                 } else {
                     let files = (try? decoder.decode([File].self, from: data)) ?? []
                     observer.didEnumerate(files.map { file in
-                        FileItem(file: file, overrideParent: file.folder_id == parsedPage.rootFolder ? NSFileProviderItemIdentifier("course-\(parsedPage.courses[parsedPage.currentIndex])") : nil)
+                        FileItem(file: file, overrideParent: file.folder_id == parsedPage.rootFolder ? NSFileProviderItemIdentifier("course-\(parsedPage.courseIds[parsedPage.currentIndex])") : nil)
                     })
                     if files.isEmpty {
-                        if parsedPage.currentIndex.advanced(by: 1) < parsedPage.courses.endIndex {
-                            try observer.finishEnumerating(upTo: Page(courses: parsedPage.courses, currentIndex: parsedPage.currentIndex + 1, coursePage: .folderPage(1), rootFolder: nil).asPage())
+                        if parsedPage.currentIndex.advanced(by: 1) < parsedPage.courseIds.endIndex {
+                            try observer.finishEnumerating(upTo: Page(courseIds: parsedPage.courseIds, currentIndex: parsedPage.currentIndex + 1, coursePage: .folderPage(1), rootFolder: nil).asPage())
                         } else {
                             observer.finishEnumerating(upTo: nil)
                         }
                     } else {
-                        try observer.finishEnumerating(upTo: Page(courses: parsedPage.courses, currentIndex: parsedPage.currentIndex, coursePage: .filePage(pageIndex + 1), rootFolder: parsedPage.rootFolder).asPage())
+                        try observer.finishEnumerating(upTo: Page(courseIds: parsedPage.courseIds, currentIndex: parsedPage.currentIndex, coursePage: .filePage(pageIndex + 1), rootFolder: parsedPage.rootFolder).asPage())
                     }
                 }
             } catch let e {

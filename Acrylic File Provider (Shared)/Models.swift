@@ -8,7 +8,7 @@
 import Foundation
 import FileProvider
 
-struct Course: Codable {
+struct Course: Decodable {
     var id: Int
     var name: String
 }
