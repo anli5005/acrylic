@@ -11,6 +11,7 @@ import FileProvider
 struct Course: Decodable {
     var id: Int
     var name: String
+    var created_at: Date?
 }
 
 struct Folder: Decodable {
@@ -41,6 +42,7 @@ extension Course {
         struct TempCourse: Decodable {
             var id: Int
             var name: String?
+            var created_at: Date?
         }
         
         guard let baseHost = API.baseHost else {
@@ -49,18 +51,18 @@ extension Course {
         
         var courses = [Course]()
         let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
         var page = 1
         while true {
             let url = URL(string: "https://\(baseHost)/api/v1/courses?per_page=100&page=\(page)")!
             let (data, _) = try await URLSession.shared.data(for: API.request(for: url))
             do {
                 let dataCourses = try decoder.decode([TempCourse].self, from: data)
-                courses.append(contentsOf: dataCourses.compactMap{
-                    guard let name = $0.name
-                    else{
+                courses.append(contentsOf: dataCourses.compactMap {
+                    guard let name = $0.name else {
                         return nil
                     }
-                    return Course(id:$0.id, name:name)
+                    return Course(id: $0.id, name: name, created_at: $0.created_at)
                 })
                 if dataCourses.count < 100 {
                     break

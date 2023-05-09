@@ -20,6 +20,19 @@
 		<string>com.apple.fileprovider-nonui</string>
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).FileProviderExtension</string>
+		<key>NSFileProviderDecorations</key>
+		<array>
+			<dict>
+				<key>BadgeImageType</key>
+				<string>dev.anli.macos.Acrylic.type.course</string>
+				<key>Category</key>
+				<string>FolderBadge</string>
+				<key>Identifier</key>
+				<string>dev.anli.macos.Acrylic.decoration.course</string>
+				<key>LocalizedTitle</key>
+				<string>Course</string>
+			</dict>
+		</array>
 	</dict>
 	<key>TEAM_IDENTIFIER</key>
 	<string>$(TeamIdentifierPrefix)</string>

@@ -74,7 +74,12 @@ class FolderEnumerator: NSObject, NSFileProviderEnumerator {
                 
                 let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/folders/\(self.folderIdentifier)/\(endpoint)?per_page=\(Self.perPage)&page=\(pageIndex)")!)
                 
-                let (data, _) = try await URLSession.shared.data(for: request)
+                let (data, response) = try await URLSession.shared.data(for: request)
+                
+                if let response = response as? HTTPURLResponse, response.statusCode == 403 {
+                    throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadNoPermissionError)
+                }
+                
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .custom { keys in
                     if keys.last!.stringValue == "content-type" {

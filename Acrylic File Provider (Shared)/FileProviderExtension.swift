@@ -37,7 +37,9 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
             } else if identifier.rawValue.starts(with: "course-") {
                 let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/courses/\(identifier.rawValue.split(separator: "-")[1])")!)
                 let (data, _) = try await URLSession.shared.data(for: request)
-                let course = try JSONDecoder().decode(Course.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let course = try decoder.decode(Course.self, from: data)
                 return CourseItem(course: course)
             } else if identifier.rawValue.starts(with: "folder-") {
                 let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/folders/\(identifier.rawValue.split(separator: "-")[1])")!)

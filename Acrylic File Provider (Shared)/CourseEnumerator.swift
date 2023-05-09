@@ -28,7 +28,10 @@ class CourseEnumerator: NSObject, NSFileProviderEnumerator {
             do {
                 if folderEnumerator == nil {
                     let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/courses/\(courseIdentifier)/folders/root")!)
-                    let (data, _) = try await URLSession.shared.data(for: request)
+                    let (data, response) = try await URLSession.shared.data(for: request)
+                    if let response = response as? HTTPURLResponse, response.statusCode == 403 {
+                        throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadNoPermissionError)
+                    }
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .iso8601
                     let folder = try decoder.decode(Folder.self, from: data)

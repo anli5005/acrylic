@@ -6,5 +6,21 @@
 	<string>$(TeamIdentifierPrefix)</string>
 	<key>UILaunchScreen</key>
 	<dict/>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeDescription</key>
+			<string></string>
+			<key>UTTypeIcons</key>
+			<dict>
+				<key>UTTypeIconBadgeName</key>
+				<string>books.vertical</string>
+			</dict>
+			<key>UTTypeIdentifier</key>
+			<string>dev.anli.macos.Acrylic.type.course</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+	</array>
 </dict>
 </plist>

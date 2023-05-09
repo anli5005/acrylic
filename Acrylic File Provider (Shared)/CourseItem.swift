@@ -8,7 +8,7 @@
 import FileProvider
 import UniformTypeIdentifiers
 
-class CourseItem: NSObject, NSFileProviderItem {
+class CourseItem: NSObject, NSFileProviderItem, NSFileProviderItemDecorating {
     let course: Course
     
     init(course: Course) {
@@ -37,5 +37,17 @@ class CourseItem: NSObject, NSFileProviderItem {
     
     var contentType: UTType {
         return .folder
+    }
+    
+    var creationDate: Date? {
+        return course.created_at
+    }
+    
+    var contentModificationDate: Date? {
+        return course.created_at
+    }
+    
+    var decorations: [NSFileProviderItemDecorationIdentifier]? {
+        return [NSFileProviderItemDecorationIdentifier("dev.anli.macos.Acrylic.decoration.course")]
     }
 }
