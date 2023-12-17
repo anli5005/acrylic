@@ -11,7 +11,7 @@
 		8916511F29DDC83900F65628 /* FileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916511E29DDC83900F65628 /* FileItem.swift */; };
 		8916872F29E10A9C00B55CD1 /* DebugAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916872E29E10A9C00B55CD1 /* DebugAssistantView.swift */; };
 		892F106E29DE28B900A61E24 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E53FAF29DD13680033110F /* UniformTypeIdentifiers.framework */; };
-		892F108929DE28B900A61E24 /* Acrylic File Provider (iOS).appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 892F106D29DE28B900A61E24 /* Acrylic File Provider (iOS).appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		892F108929DE28B900A61E24 /* Acrylic File Provider (iOS).appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 892F106D29DE28B900A61E24 /* Acrylic File Provider (iOS).appex */; platformFilters = (ios, xros, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		892F109029DE28E000A61E24 /* FolderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FDD29DD41EF0033110F /* FolderEnumerator.swift */; };
 		892F109129DE28E000A61E24 /* WorkingSetEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916511C29DDBF2800F65628 /* WorkingSetEnumerator.swift */; };
 		892F109229DE28E000A61E24 /* FileProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FB229DD13680033110F /* FileProviderExtension.swift */; };
@@ -27,6 +27,7 @@
 		892F109C29DE290900A61E24 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FD129DD37750033110F /* API.swift */; };
 		892F109D29DE290900A61E24 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FC229DD14C10033110F /* TokenStorage.swift */; };
 		892F109E29DE290900A61E24 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FC529DD14D30033110F /* Constants.swift */; };
+		89744F042A9D32FE007B1E64 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53FD429DD39550033110F /* Models.swift */; };
 		89E53F9B29DD13030033110F /* AcrylicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53F9A29DD13030033110F /* AcrylicApp.swift */; };
 		89E53F9D29DD13030033110F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E53F9C29DD13030033110F /* ContentView.swift */; };
 		89E53F9F29DD13040033110F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89E53F9E29DD13040033110F /* Assets.xcassets */; };
@@ -410,6 +411,7 @@
 				89E53F9B29DD13030033110F /* AcrylicApp.swift in Sources */,
 				89E53FC629DD14D30033110F /* Constants.swift in Sources */,
 				89E53FD229DD37750033110F /* API.swift in Sources */,
+				89744F042A9D32FE007B1E64 /* Models.swift in Sources */,
 				89E53FC929DD16120033110F /* AuthManager.swift in Sources */,
 				8916872F29E10A9C00B55CD1 /* DebugAssistantView.swift in Sources */,
 			);
@@ -444,7 +446,10 @@
 /* Begin PBXTargetDependency section */
 		892F108829DE28B900A61E24 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
+			platformFilters = (
+				ios,
+				xros,
+			);
 			target = 892F106C29DE28B900A61E24 /* Acrylic File Provider (iOS) */;
 			targetProxy = 892F108729DE28B900A61E24 /* PBXContainerItemProxy */;
 		};
@@ -481,6 +486,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -509,6 +518,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -638,6 +651,8 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "Acrylic/Acrylic (iOS).entitlements";
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Acrylic/Acrylic (macOS).entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=xros*]" = "Acrylic/Acrylic (iOS).entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=xrsimulator*]" = "Acrylic/Acrylic (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2023.5.9;
@@ -659,9 +674,10 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.anli.macos.Acrylic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -677,6 +693,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "Acrylic/Acrylic (iOS).entitlements";
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Acrylic/Acrylic (macOS).entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=xros*]" = "Acrylic/Acrylic (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2023.5.9;
@@ -698,9 +715,10 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.anli.macos.Acrylic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

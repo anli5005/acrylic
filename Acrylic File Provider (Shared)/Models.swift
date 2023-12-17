@@ -46,7 +46,7 @@ extension Course {
         }
         
         guard let baseHost = API.baseHost else {
-            throw NSFileProviderError(NSFileProviderError.notAuthenticated)
+            throw NSFileProviderError(NSFileProviderError.serverUnreachable)
         }
         
         var courses = [Course]()
@@ -64,12 +64,14 @@ extension Course {
                     }
                     return Course(id: $0.id, name: name, created_at: $0.created_at)
                 })
-                if dataCourses.count < 100 {
+                if dataCourses.count < 1 {
                     break
                 }
                 page += 1
             } catch {
-                throw NSFileProviderError(NSFileProviderError.notAuthenticated)
+                // throw NSFileProviderError(NSFileProviderError.notAuthenticated)
+                print(error)
+                break
             }
         }
         

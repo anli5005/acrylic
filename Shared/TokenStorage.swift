@@ -7,6 +7,7 @@
 
 import Foundation
 import Security
+import OSLog
 
 enum TokenStorage {
     static func retrieveSessionCookie() -> String? {

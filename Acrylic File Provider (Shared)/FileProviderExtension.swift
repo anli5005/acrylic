@@ -6,6 +6,7 @@
 //
 
 import FileProvider
+import OSLog
 
 var didForceReimport = false
 
@@ -13,7 +14,8 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
     required init(domain: NSFileProviderDomain) {
         // TODO: The containing application must create a domain using `NSFileProviderManager.add(_:, completionHandler:)`. The system will then launch the application extension process, call `FileProviderExtension.init(domain:)` to instantiate the extension for that domain, and call methods on the instance.
         super.init()
-        print("File provider started")
+        os_log("File provider started")
+        os_log("Base URL: \(API.baseHost ?? "none", privacy: .public)")
         if !didForceReimport {
             // NSFileProviderManager(for: domain)?.signalEnumerator(for: .rootContainer) { _ in }
             didForceReimport = true
@@ -29,7 +31,7 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
         
         let itemTask = Task<NSFileProviderItem, Error> {
             guard let baseHost = API.baseHost else {
-                throw NSFileProviderError(NSFileProviderError.notAuthenticated)
+                throw NSFileProviderError(NSFileProviderError.serverUnreachable)
             }
             
             if identifier == NSFileProviderItemIdentifier.rootContainer {
@@ -173,7 +175,7 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
 
 func fetch(for itemIdentifier: NSFileProviderItemIdentifier, version requestedVersion: NSFileProviderItemVersion?, request: NSFileProviderRequest, progress: Progress) async throws -> (URL, NSFileProviderItem) {
     guard let baseHost = API.baseHost else {
-        throw NSFileProviderError(NSFileProviderError.notAuthenticated)
+        throw NSFileProviderError(NSFileProviderError.serverUnreachable)
     }
     
     guard itemIdentifier.rawValue.starts(with: "file-") else {

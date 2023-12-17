@@ -19,7 +19,7 @@ class CourseEnumerator: NSObject, NSFileProviderEnumerator {
 
     func enumerateItems(for observer: NSFileProviderEnumerationObserver, startingAt page: NSFileProviderPage) {
         guard let baseHost = API.baseHost else {
-            observer.finishEnumeratingWithError(NSFileProviderError(NSFileProviderError.notAuthenticated))
+            observer.finishEnumeratingWithError(NSFileProviderError(NSFileProviderError.serverUnreachable))
             return
         }
         
