@@ -53,7 +53,7 @@ class FolderEnumerator: NSObject, NSFileProviderEnumerator {
             return
         }
         
-        print("FolderEnumerator.enumerateItems()")
+        logger.info("FolderEnumerator.enumerateItems()")
         Task {
             do {
                 let endpoint: String

@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import OSLog
+
+let logger = Logger(subsystem: "dev.anli.macos.Acrylic", category: "Application")
 
 @main
 struct AcrylicApp: App {

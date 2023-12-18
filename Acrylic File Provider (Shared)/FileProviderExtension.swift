@@ -8,18 +8,18 @@
 import FileProvider
 import OSLog
 
-var didForceReimport = false
+let logger = Logger(subsystem: "dev.anli.macos.Acrylic", category: "File Provider")
+var lastFetchDates = [NSFileProviderItemIdentifier: Date]()
 
 class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
+    let domain: NSFileProviderDomain
+    
     required init(domain: NSFileProviderDomain) {
         // TODO: The containing application must create a domain using `NSFileProviderManager.add(_:, completionHandler:)`. The system will then launch the application extension process, call `FileProviderExtension.init(domain:)` to instantiate the extension for that domain, and call methods on the instance.
+        self.domain = domain
         super.init()
-        os_log("File provider started")
-        os_log("Base URL: \(API.baseHost ?? "none", privacy: .public)")
-        if !didForceReimport {
-            // NSFileProviderManager(for: domain)?.signalEnumerator(for: .rootContainer) { _ in }
-            didForceReimport = true
-        }
+        logger.info("File provider started")
+        logger.info("Base URL: \(API.baseHost ?? "none", privacy: .public)")
     }
     
     func invalidate() {
@@ -71,7 +71,7 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
             do {
                 completionHandler(try await itemTask.value, nil)
             } catch let e {
-                print(identifier)
+                logger.info("\(identifier.rawValue)")
                 completionHandler(nil, e)
             }
         }
@@ -121,8 +121,36 @@ class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension {
         return Progress()
     }
     
+    func signalIfNeeded(identifier containerItemIdentifier: NSFileProviderItemIdentifier) {
+        let lastFetch = lastFetchDates[containerItemIdentifier] ?? .distantPast
+        let threshold: TimeInterval = containerItemIdentifier == .workingSet ? 600 : 120
+        if lastFetch.timeIntervalSinceNow < -threshold {
+            logger.info("Signaling enumerator for \(containerItemIdentifier.rawValue)")
+            Task {
+                guard let manager = NSFileProviderManager(for: domain) else {
+                    logger.fault("No NSFileProviderManager for \(self.domain.identifier.rawValue)")
+                    return
+                }
+                
+                do {
+                    try await manager.signalEnumerator(for: containerItemIdentifier)
+                    lastFetchDates[containerItemIdentifier] = Date()
+                    logger.info("Done signaling enumerator for \(containerItemIdentifier.rawValue)")
+                } catch {
+                    logger.warning("Failed to signal enumerator for \(containerItemIdentifier.rawValue): \(error)")
+                }
+            }
+        }
+    }
+    
     func enumerator(for containerItemIdentifier: NSFileProviderItemIdentifier, request: NSFileProviderRequest) throws -> NSFileProviderEnumerator {
-        print("Getting enumerator for \(containerItemIdentifier)")
+        if containerItemIdentifier != .workingSet {
+            signalIfNeeded(identifier: .workingSet)
+        }
+        
+        signalIfNeeded(identifier: containerItemIdentifier)
+        
+        logger.info("Getting enumerator for \(containerItemIdentifier.rawValue)")
         if containerItemIdentifier == .rootContainer {
             return RootFileProviderEnumerator()
         } else if containerItemIdentifier.rawValue.starts(with: "course-") {

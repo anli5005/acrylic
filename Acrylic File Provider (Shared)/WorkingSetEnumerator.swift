@@ -34,13 +34,13 @@ class WorkingSetEnumerator: NSObject, NSFileProviderEnumerator {
             return
         }
         
-        print("WorkingSetEnumerator.enumerateItems()")
+        logger.info("WorkingSetEnumerator.enumerateItems()")
         Task {
             do {
                 let endpoint: String
                 let pageIndex: Int
                 if page.rawValue == NSFileProviderPage.initialPageSortedByDate as Data || page.rawValue == NSFileProviderPage.initialPageSortedByName as Data {
-                    print("RESTARTING ENUMERATION")
+                    logger.info("RESTARTING ENUMERATION")
                     do {
                         let courses = try await Course.fetch()
                         observer.didEnumerate(courses.map {
@@ -63,7 +63,7 @@ class WorkingSetEnumerator: NSObject, NSFileProviderEnumerator {
                         endpoint = "folders"
                 }
                 
-                print("Now enumerating \(endpoint) page \(pageIndex) from \(parsedPage.currentIndex)")
+                logger.info("Now enumerating \(endpoint) page \(pageIndex) from \(parsedPage.currentIndex)")
                 
                 let request = API.request(for: URL(string: "https://\(baseHost)/api/v1/courses/\(parsedPage.courseIds[parsedPage.currentIndex])/\(endpoint)?per_page=\(Self.perPage)&page=\(pageIndex)")!)
                                 

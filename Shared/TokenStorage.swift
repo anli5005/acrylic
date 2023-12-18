@@ -41,7 +41,7 @@ enum TokenStorage {
             kSecValueData as String: data as CFData
         ] as [String: Any] as CFDictionary, nil)
         
-        print("Saved and got status \(status)")
+        logger.info("Saved and got status \(status)")
     }
     
     static func clear() {

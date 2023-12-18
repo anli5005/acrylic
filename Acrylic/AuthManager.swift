@@ -35,7 +35,7 @@ class AuthManager: ObservableObject {
         if oldState == .signingIn {
             NSFileProviderManager.add(Constants.domain) { error in
                 if let error {
-                    print("Error: \(error)")
+                    logger.fault("Couldn't add file provider: \(error, privacy: .public)")
                 }
             }
         }
@@ -55,7 +55,7 @@ class AuthManager: ObservableObject {
         state = .signedOut
         NSFileProviderManager.remove(Constants.domain, mode: .removeAll) { _, error in
             if let error {
-                print("Error: \(error)")
+                logger.fault("Couldn't remove file provider: \(error, privacy: .public)")
             }
         }
     }

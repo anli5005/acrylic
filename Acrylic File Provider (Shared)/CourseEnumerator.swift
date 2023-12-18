@@ -23,7 +23,7 @@ class CourseEnumerator: NSObject, NSFileProviderEnumerator {
             return
         }
         
-        print("CourseEnumerator.enumerateItems()")
+        logger.info("CourseEnumerator.enumerateItems()")
         Task {
             do {
                 if folderEnumerator == nil {

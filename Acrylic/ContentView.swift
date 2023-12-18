@@ -36,14 +36,14 @@ struct ContentView: View {
                 Button("Try installing file provider") {
                     NSFileProviderManager.add(Constants.domain) { error in
                         if let error {
-                            print("Error: \(error)")
+                            logger.fault("Couldn't add file provider on demand: \(error, privacy: .public)")
                         }
                     }
                 }
                 Button("Uninstall file provider") {
                     NSFileProviderManager.remove(Constants.domain, mode: .removeAll) { _, error in
                         if let error {
-                            print("Error: \(error)")
+                            logger.fault("Couldn't remove file provider on demand: \(error, privacy: .public)")
                         }
                     }
                 }

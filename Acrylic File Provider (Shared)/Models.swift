@@ -70,7 +70,7 @@ extension Course {
                 page += 1
             } catch {
                 // throw NSFileProviderError(NSFileProviderError.notAuthenticated)
-                print(error)
+                logger.fault("\(error, privacy: .public)")
                 break
             }
         }
